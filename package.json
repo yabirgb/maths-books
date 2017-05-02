@@ -1,0 +1,16 @@
+{
+  "name": "mathbooks",
+  "version": "1.0.0",
+  "description": "A web with books info",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@whoaa/amazon-product-api": "^1.0.0",
+    "amazon-products": "0.0.9",
+    "express": "^4.15.2"
+  }
+}

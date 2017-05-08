@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{%block head%}
+<style media="screen">
+  .portadas{
+    width: 60%;
+  }
+  .references{
+    color: #7a7a7a;
+    text-decoration: underline;
+  }
+</style>
+{%endblock%}
+
+{% block content %}
+
+    {% for book in books.items %}
+    <div class="box">
+      <article class="media">
+        <div class="media">
+            <img class="image portadas" src="{{book.image}}" alt="">
+        </div>
+        <div class="media-content">
+          <div class="content">
+            <p>
+              <h4 class="title">
+                <a class="references" href="{{url_for('show_book',asin=book.asin)}}">{{ book.title }}</a>
+              </h4>
+
+              {% for shelf in book.nodes %}
+                <span class="tag is-medium"><a href="/shelf/{{shelf.pk}}/1">{{ shelf.name }}</a></span>
+              {% endfor %}
+          </div>
+        </div>
+      </article>
+    </div>
+    {% endfor %}
+
+
+
+  {% if books.has_prev %}<a href="{{ url_for('shelf',topic=topic, page=books.prev_num) }}">&lt;&lt; Previous page</a>{% else %}&lt;&lt; Previous page{% endif %} |
+  {% if books.has_next %}<a href="{{ url_for('shelf',topic=topic, page=books.next_num) }}">Next page &gt;&gt;</a>{% else %}Next page &gt;&gt;{% endif %}
+
+{% endblock %}

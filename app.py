@@ -67,19 +67,23 @@ def show_book(asin):
 def send_css(path):
     return send_from_directory('static/css', path)
 
-# Save e-mail to database and send to success page
-@app.route('/prereg', methods=['POST'])
-def prereg():
-    email = None
-    if request.method == 'POST':
-        email = request.form['email']
-        # Check that email does not already exist (not a great query, but works)
-        if not db.session.query(User).filter(User.email == email).count():
-            reg = User(email)
-            db.session.add(reg)
-            db.session.commit()
-            return render_template('success.html')
-    return render_template('index.html')
+@app.route('/shelf/<topic>/<int:page>',methods=['GET'])
+def shelf(topic,page=1):
+    per_page = 20
+    books = Book.query.filter(Book.nodes.any(pk=topic)).paginate(page,per_page,error_out=True)
+    return render_template('list.html',books=books, topic=topic)
+
+@app.route("/search/<query>/<int:page>")
+def search(query, page=1):
+    per_page = 20
+    books = Book.query.filter(Book.title.contains(query)).paginate(page, per_page, error_out=True)
+
+    return render_template('search.html',books=books, topic=query)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 
 if __name__ == '__main__':
     app.debug = True

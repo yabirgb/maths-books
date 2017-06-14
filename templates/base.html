@@ -16,7 +16,7 @@
           Home
         </a>
 
-        <div class="nav-item field has-addons">
+        <div class="nav-item field has-addons is-hidden-touch ">
           <p class="control">
             <input class="input" id="search-text" onkeydown="if (event.keyCode == 13)
 {document.getElementById('search-btn').click(); return false;}" type="text" placeholder="Find by title">
@@ -41,7 +41,24 @@
       </div>
 
     </nav>
-    <div class="container is-medium">
+
+    <div class="container is-fluid is-medium">
+      <!-- Barra de busqueda en movil -->
+      <div class="columns is-mobile is-hidden-tablet">
+        <div class="column">
+          <div class="nav-item field has-addons">
+            <p class="control">
+              <input class="input" id="search-text" onkeydown="if (event.keyCode == 13)
+  {document.getElementById('search-btn').click(); return false;}" type="text" placeholder="Find by title">
+            </p>
+            <p class="control">
+              <a class="button is-info" id="search-btn">
+                Search
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
       {% block content %}
       {% endblock %}
     </div>

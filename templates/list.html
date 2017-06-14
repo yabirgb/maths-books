@@ -2,8 +2,11 @@
 
 {%block head%}
 <style media="screen">
-  .portadas{
-    width: 60%;
+  .crop img{
+  width:400px;
+  height:300px;
+  position: absolute;
+  clip: rect(0px,220px, 150px, 0px);
   }
   .references{
     color: #7a7a7a;
@@ -15,7 +18,7 @@
 {% block content %}
     <br>
     {% for book in books.items %}
-    <div class="box">
+    <div class="box is-hidden-touch">
       <article class="media">
         <div class="media-left">
             <img class="image portadas" src="{{book.image}}" alt="">
@@ -31,6 +34,25 @@
         </div>
       </article>
     </div>
+
+    <div class="box is-hidden-desktop">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image">
+            <img class="image portadas" src="{{book.image}}" alt="">
+          </figure>
+        </div>
+        <div class="card-content">
+            <div class="media-content">
+              <p class="title is-4"><a class="references" href="{{url_for('show_book',asin=book.asin)}}">{{ book.title }}</a></p>
+            </div>
+          </div>
+
+          <div class="content">
+            {% for shelf in book.nodes %}<span class="tag is-medium"><a href="/shelf/{{shelf.pk}}/1">{{ shelf.name }}</a></span>{% endfor %}
+          </div>
+        </div>
+      </div>
     {% endfor %}
   {% if books.has_prev %}<a class="pagination-previous" href="{{ url_for('shelf',topic=topic, page=books.prev_num) }}">Previous page</a>{% else %}<a class="pagination-previous disabled" disabled>Previous page</a>{% endif %}
   {% if books.has_next %}<a class="pagination-next" href="{{ url_for('shelf',topic=topic, page=books.next_num) }}">Next page</a>{% else %}<a class="pagination-next disabled" disabled>Previous page</a>{% endif %}

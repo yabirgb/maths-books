@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="icon" type="image/png" href="/static/icons/notebook.png" >
     <!-- Thanks to http://www.flaticon.com/authors/madebyoliver for provide the images -->
     <title>ListedMaths</title>
@@ -13,77 +14,83 @@
     <meta property="og:description"        content="A full analysis on answers from https://math.stackexchange.com/ to collect the best books." />
     <meta property="og:image"              content="https://listedmaths.com/static/icons/notebook64.png" />
     <meta name="keywords" content="Books,Math,Physics,Computer Science,Economy">
+    <style media="screen">
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+
+      main {
+        flex: 1 0 auto;
+      }
+    </style>
     {%block head%}
     {%endblock%}
+
   </head>
   <body>
-    <nav class="nav fixed">
-      <div class="nav-left">
-        <a href = "/" class="nav-item">
-          Home
-        </a>
 
-        <div class="nav-item field has-addons is-hidden-touch ">
-          <p class="control">
-            <input class="input" id="search-text" onkeydown="if (event.keyCode == 13)
-{document.getElementById('search-btn').click(); return false;}" type="text" placeholder="Find by title">
-          </p>
-          <p class="control">
-            <a class="button is-info" id="search-btn">
-              Search
-            </a>
-          </p>
+      <nav>
+        <div class="nav-wrapper teal lighten-2">
+          <a href="/" class="brand-logo center">ListedMaths</a>
+          <ul class="right hide-on-med-and-down">
+            <li>
+              <a href="https://twitter.com/share" class="twitter-share-button" data-text="A list of books from different fields of Mathematics" data-url="https://listedmaths.com/" data-via="yabirgb" data-hashtags="maths">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </li>
+            <li>
+              <a href="https://github.com/yabirgb/maths-books">
+                <span class="icon">
+                  <svg aria-hidden="true" opacity="0.8" class="octicon octicon-mark-github" height="24" version="1.1" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+                </span>
+              </a>
+            </li>
+          </ul>
         </div>
-      </div>
-
-      <div class="nav-center">
-        <div class="nav-item">
-          <a href="https://twitter.com/share" class="twitter-share-button" data-text="A list of books from different fields of Mathematics" data-url="https://listedmaths.com/" data-via="yabirgb" data-hashtags="maths">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </div>
-        <a href="https://github.com/yabirgb/maths-books" class="nav-item">
-          <span class="icon">
-            <svg aria-hidden="true" opacity="0.5" class="octicon octicon-mark-github" height="24" version="1.1" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
-          </span>
-        </a>
-      </div>
-
-    </nav>
+      </nav>
 
     <div class="container is-fluid is-medium">
       <!-- Barra de busqueda en movil -->
-      <div class="columns is-mobile is-hidden-tablet">
-        <div class="column">
-          <div class="nav-item field has-addons">
-            <p class="control">
+      <br>
+      <div class="row">
+        <div class="col s10">
               <input class="input" id="search-text" onkeydown="if (event.keyCode == 13)
-  {document.getElementById('search-btn').click(); return false;}" type="text" placeholder="Find by title">
-            </p>
-            <p class="control">
-              <a class="button is-info" id="search-btn">
-                Search
-              </a>
+  {document.getElementById('search-btn').click(); return false;}" type="text" placeholder="Search by title or author">
             </p>
           </div>
+          <div class="col s2">
+            <a id="search-btn" class="waves-effect waves-light btn"><i class="material-icons right">search</i>Search</a>
+          </div>
         </div>
-      </div>
       {% block content %}
       {% endblock %}
     </div>
 
-    <footer class="footer">
+    <footer class="page-footer grey lighten-4">
       <div class="container">
-        <div class="content has-text-centered">
-          <p>
-            <strong>ListedMaths created by <a href="https://twitter.com/yabirgb">Yábir García</a></strong>.
-          </p>
-          <p>
-            <a class="icon" href="https://github.com/yabirgb">
-              <svg aria-hidden="true" opacity="0.9" class="octicon octicon-mark-github" height="24" version="1.1" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
-            </a>
-          </p>
+        <div class="row">
+          <div class="col l6 s12">
+            <h5>About</h5>
+            <p><strong>Created by <a href="https://twitter.com/yabirgb">Yábir García</a></strong>.</p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5>Links</h5>
+            <ul>
+              <li><a class="icon" href="https://github.com/yabirgb">
+                <svg aria-hidden="true" opacity="0.9" class="octicon octicon-mark-github" height="24" version="1.1" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+              </a></li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container black-text">
+          This project is in the amazon referral service.
         </div>
       </div>
     </footer>
+
     <script type="text/javascript">
     document.getElementById('search-btn').onclick = function()
     {

@@ -7,38 +7,36 @@
   <h2 class="subtitle is-2">A list of books from different fields of Mathematics </h2>
 </div>
 
-<div class="column">
-  <h3 class="title is-3">About </h3>
-  <p>As a computer science student, finding out the existence of
-    <a href="http://www.dev-books.com/">dev-books</a> lists really helped me to
-    learn new stuff. I'm also a mathematics student and I got inspired by these
-    lists to make my own list of math related books. Hopefully you will find it
-    as useful as dev-books lists were for me.
-  </p>
-  <p>This project is open-source in GitHub, please feel free to make any suggestion.</p>
-</div>
-
 <section class="section">
   <div class="container">
     <div class="heading">
       <h3 class="title is-3">Some Tags</h3>
-      <p><span class="tag is-medium"><a href="/shelf/4893445031/1">Algebra</a></span>
-      <span class="tag is-medium"><a href="/shelf/4893447031/1">Geometry</a></span>
-      <span class="tag is-medium"><a href="/shelf/1349980031/1">Mathematics</a></span>
-      <span class="tag is-medium"><a href="/shelf/4893446031/1">Calculus</a></span>
-      <span class="tag is-medium"><a href="/shelf/1350061031/1">Economy</a></span>
-      <span class="tag is-medium"><a href="/shelf/903448031/1">Computer science</a></span>
-      <span class="tag is-medium"><a href="/shelf/1349978031/1">Physics</a></span>
-      <span class="tag is-medium"><a href="/shelf/903454031/1">Computer security</a></span>
-      <span class="tag is-medium"><a href="/shelf/1350116031/1">Databases</a></span>
-      <span class="tag is-medium"><a href="/shelf/4893442031/1">Electricity and magnetism</a></span>
-      <span class="tag is-medium"><a href="/shelf/4893440031/1">Applied physics</a></span>
-      <span class="tag is-medium"><a href="/shelf/4893541031/1">Space Science</a></span>
-      <span class="tag is-medium"><a href="/shelf/4893532031/1">Civil engineering</a></span>
+      <p><div class="chip"><a href="/shelf/4893445031/1">Algebra</a></div>
+      <div class="chip"><a href="/shelf/4893447031/1">Geometry</a></div>
+      <div class="chip"><a href="/shelf/1349980031/1">Mathematics</a></div>
+      <div class="chip"><a href="/shelf/4893446031/1">Calculus</a></div>
+      <div class="chip"><a href="/shelf/1350061031/1">Economy</a></div>
+      <div class="chip"><a href="/shelf/903448031/1">Computer science</a></div>
+      <div class="chip"><a href="/shelf/1349978031/1">Physics</a></div>
+      <div class="chip"><a href="/shelf/903454031/1">Computer security</a></div>
+      <div class="chip"><a href="/shelf/1350116031/1">Databases</a></div>
+      <div class="chip"><a href="/shelf/4893442031/1">Electricity and magnetism</a></div>
+      <div class="chip"><a href="/shelf/4893440031/1">Applied physics</a></div>
+      <div class="chip"><a href="/shelf/4893541031/1">Space Science</a></div>
+      <div class="chip"><a href="/shelf/4893532031/1">Civil engineering</a></div>
+      <div class="chip"><a href="/shelf/1349975031/1">Astronomy</a></div>
     </p>
     </div>
   </div>
 </section>
 
+<h4>Random books</h4>
+<div class="row">
+  {%for book in books%}
+  <div class="col s4">
+    {% include 'book_card.html' %}
+  </div>
+  {%endfor%}
+</div>
 
 {% endblock %}

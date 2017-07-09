@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-image">
+    <img class="responsive-img" src="{{book.image}}">
+    <span class="card-title">{{ book.title }}</span>
+  </div>
+  <div class="card-content">
+    <p>By {{book.author}}</p>
+    <p>{% for shelf in book.nodes %}
+      <div class="chip">
+        <a href="/shelf/{{shelf.pk}}/1">{{ shelf.name }}</a>
+      </div>
+      {% endfor %}
+    </p>
+  </div>
+  <div class="card-action">
+    <a href="{{url_for('show_book',asin=book.asin)}}">View</a>
+  </div>
+</div>

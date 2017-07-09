@@ -17,43 +17,28 @@
 
 {% block content %}
     <br>
-    {% for book in books.items %}
-    <div class="box is-hidden-touch">
-      <article class="media">
-        <div class="media-left">
-            <img class="image portadas" src="{{book.image}}" alt="">
-        </div>
-        <div class="media-content">
-          <div class="content">
-            <p>
-              <h4 class="title">
-                <a class="references" href="{{url_for('show_book',asin=book.asin)}}">{{ book.title }}</a>
-              </h4>
-              {% for shelf in book.nodes %}<span class="tag is-medium"><a href="/shelf/{{shelf.pk}}/1">{{ shelf.name }}</a></span>{% endfor %}
-          </div>
-        </div>
-      </article>
-    </div>
 
-    <div class="box is-hidden-desktop">
-      <div class="card">
-        <div class="card-image">
-          <figure class="image">
-            <img class="image portadas" src="{{book.image}}" alt="">
-          </figure>
-        </div>
-        <div class="card-content">
-            <div class="media-content">
-              <p class="title is-4"><a class="references" href="{{url_for('show_book',asin=book.asin)}}">{{ book.title }}</a></p>
+    <div class="row">
+                <div class="col s12">
+                    <div id="valign" class="section scrollspy">
+                        <div class="row">
+                          {% for book in books.items %}
+                            <div class="col s12 m4">
+                              {% include 'book_card.html' %}
+                            </div>
+                            {% if loop.index is divisibleby 3%}
+                            </div>
+                            <div class="row">
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
-          </div>
 
-          <div class="content">
-            {% for shelf in book.nodes %}<span class="tag is-medium"><a href="/shelf/{{shelf.pk}}/1">{{ shelf.name }}</a></span>{% endfor %}
-          </div>
-        </div>
-      </div>
-    {% endfor %}
-  {% if books.has_prev %}<a class="pagination-previous" href="{{ url_for('shelf',topic=topic, page=books.prev_num) }}">Previous page</a>{% else %}<a class="pagination-previous disabled" disabled>Previous page</a>{% endif %}
-  {% if books.has_next %}<a class="pagination-next" href="{{ url_for('shelf',topic=topic, page=books.next_num) }}">Next page</a>{% else %}<a class="pagination-next disabled" disabled>Previous page</a>{% endif %}
-{% endblock %}
+
+    <ul class="pagination center-align">
+      {% if books.has_prev %}<a href="{{ url_for('shelf',topic=topic, page=books.prev_num) }}"><i class="material-icons">chevron_left</i></a>{% else %}<a class="disabled" ><i class="material-icons">chevron_left</i></a>{% endif %}
+      {% if books.has_next %}<a href="{{ url_for('shelf',topic=topic, page=books.next_num) }}"><i class="material-icons">chevron_right</i></a>{% else %}<a class="disabled" ><i class="material-icons">chevron_right</i></a>{% endif %}
+    </ul>
+
+  {% endblock %}

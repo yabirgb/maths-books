@@ -2,35 +2,37 @@
 
 {% block content %}
 
-<div class="container">
+
   <div class="columns">
     <div class="column">
         <h1 class="title is-2 ">{{book.title}}</h1>
     </div>
   </div>
 
-  <div class="columns">
-    <div class="column is-one-third">
-      <img src="{{book.image}}" alt="">
+  <div class="row">
+    <div class="col s12 m4">
+      <img class="responsive-img" src="{{book.image}}">
     </div>
 
-    <div class="column is-two-third">
+    <div class="col s12 m8">
       <ul>
         <li>Author: {{book.author}}</li>
         <li>Publisher: {{book.publisher}}</li>
         <li>Publish date: {{book.published}}</li>
         <li><br>
         {% for shelf in book.nodes %}
-          <span class="tag is-medium"><a href="/shelf/{{shelf.pk}}/1">{{ shelf.name }}</a></span>
+          <div class="chip">
+            <a href="/shelf/{{shelf.pk}}/1">{{ shelf.name }}</a>
+          </div>
         {% endfor %}
         </li>
         <br>
         <li>
-          <a href="{{book.url}}" class="button is-warning">
+          <a href="{{book.url}}" class="waves-effect waves-light btn yellow darken-3">
             Visit on Amazon
           </a>
           <a href="http://twitter.com/share?text=Check {{book.title}}&url=https://listedmaths.com/book/{{book.asin}}&hashtags=maths&via=yabirgb"
-          class="button is-info">
+          class="waves-effect waves-light btn light-blue lighten-1">
             Share on Twitter
           </a>
 
@@ -39,6 +41,5 @@
       </ul>
     </div>
   </div>
-</div>
 
 {% endblock %}

@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import func, select
+from sqlalchemy import or_
 
 app = Flask(__name__, static_url_path="/static")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'YOURDATABASE'
@@ -56,7 +58,9 @@ class Book(db.Model):
 # Set "homepage"
 @app.route('/')
 def index():
-    return render_template('index.html')
+    #https://stackoverflow.com/questions/60805/getting-random-row-through-sqlalchemy
+    books = Book.query.order_by(func.random()).offset(20).limit(3).all()
+    return render_template('index.html', books=books)
 
 @app.route('/book/<asin>')
 def show_book(asin):
@@ -76,9 +80,9 @@ def shelf(topic,page=1):
 @app.route("/search/<query>/<int:page>")
 def search(query, page=1):
     per_page = 20
-    books = Book.query.filter(Book.title.contains(query)).paginate(page, per_page, error_out=True)
+    books = Book.query.filter(or_(Book.title.contains(query),Book.author.contains(query))).paginate(page, per_page, error_out=True)
 
-    return render_template('search.html',books=books, topic=query)
+    return render_template('list.html',books=books, topic=query)
 
 @app.errorhandler(404)
 def page_not_found(e):
